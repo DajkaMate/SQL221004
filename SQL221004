@@ -1,0 +1,38 @@
+-- sql utasítás végrehajtás
+-- paraméter alapján melyik az x. legkisebb (vagy legnagyobb) érték?
+-- SELECT * from sb;
+-- vetítés vetítsük ki az oszlopot többször
+-- SELECT s, s from sb
+-- Descartes szorzat
+-- Select * from sb, sb as sb1;
+-- sb-nek hány sora van
+-- Select count(*) from sb;
+-- Hány sora volt Descartes szorzatnál
+-- Select count(*) from sb, sb as sb1;
+-- mindig a from hajtódik végre először: a táblák Descartes szorzatai lesz a kezdeti MUNKATÁBLA 
+-- from után a where feltétel hajtódik végre másodjára(1. From; 2. WHERE;). A  sorokat szűrjük feltételek szerint
+-- Select sb.s, sb1.s from sb, sb as sb1
+-- where sb.s<=sb1.s
+-- GROUP BY sb.s,sb1.s;
+-- Select sb.s, count(sb1.s) from sb, sb as sb1
+-- where sb.s<=sb1.s
+-- GROUP BY sb.s;
+-- 1.From (Descartes) 2. Where (Sorosk szűrése) 2. Group by (csoportosítás: általában ez azt jelenti, csőkken a rekordszám
+-- Select sb.s, count(*) as db from sb, sb as sb1
+-- where sb.s<=sb1.s
+-- GROUP BY sb.s
+-- having count(*)=1;
+-- Select sb.s as db from sb, sb as sb1
+-- where sb.s<=sb1.s
+-- GROUP BY sb.s
+-- having count(*)=1;
+-- 1. From 2. Where 3. Groupby 4. Having 5. Select VetítésSelect sb.s, count(*) as db from sb, sb as sb1
+-- Select sb.s as db from sb, sb as sb1
+-- where sb.s<=sb1.s
+-- GROUP BY sb.s
+-- having count(*)=1;
+Set @szam=1;
+Select sb.s from sb, sb as sb1
+where sb.s<=sb1.s
+GROUP BY sb.s
+having count(*)=@szam;
